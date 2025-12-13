@@ -1,0 +1,9 @@
+{
+  "vehicle_id": "HM001",
+  "age_years": 4,
+  "mileage_km": 60000,
+  "last_service_days": 280,
+  "dtc_count": 5,
+  "complaints": 3,
+  "warranty_claims": 2
+}
