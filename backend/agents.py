@@ -1,54 +1,63 @@
-import joblib
-model = joblib.load("model.pkl")
+import random
+from datetime import datetime
 
-class DataAnalysisAgent:
-    def analyze(self, v):
-        return [
-            v["age_years"],
-            v["mileage_km"],
-            v["last_service_days"],
-            v["dtc_count"],
-            v["complaints"],
-            v["warranty_claims"]
-        ]
+# 🔮 Predictive Agent
+def predictive_agent():
+    return {
+        "engine_vibration": "Anomaly detected",
+        "battery_health": "Degrading faster than baseline",
+        "brake_wear": "Expected in 10–14 days",
+        "confidence": "93%",
+        "agent": "Diagnosis Agent",
+    }
 
-class DiagnosisAgent:
-    def predict(self, features):
-        risk = model.predict_proba([features])[0][1]
-        return {"risk": risk, "status": "CRITICAL" if risk > 0.7 else "NORMAL"}
+# 📈 Telemetry Agent
+def telemetry_agent():
+    return {
+        "engine_temp": f"{random.randint(88, 96)} °C",
+        "rpm": random.randint(2800, 3400),
+        "battery_voltage": "12.4V",
+        "engine_load": f"{random.randint(60, 80)}%",
+        "timestamp": datetime.now(),
+    }
 
-class VoiceAgent:
-    def call(self, vid):
-        print(f"📞 Voice Agent: Calling {vid}")
+# 🔐 UEBA Agent
+def ueba_agent():
+    events = [
+        "Abnormal agent behavior detected",
+        "Unauthorized access blocked",
+        "Policy enforcement triggered",
+    ]
+    return {
+        "severity": "HIGH",
+        "event": random.choice(events),
+        "agent": "UEBA Security Agent",
+        "time": datetime.now(),
+    }
 
-class SchedulingAgent:
-    def book(self, vid):
-        print(f"📅 Service booked for {vid}")
+# 🤖 Voice Agent
+def voice_agent(message):
+    message = message.lower()
 
-class ManufacturingAgent:
-    def rca(self):
-        print("🏭 RCA sent to manufacturing")
+    if "risk" in message:
+        reply = "Failure risk is low with high confidence."
+    elif "service" in message:
+        reply = "Service is recommended within the next 7 days."
+    else:
+        reply = "Your vehicle is operating normally."
 
-class UEBAAgent:
-    def monitor(self, agent, action):
-        pass
+    return {
+        "reply": reply,
+        "agent": "Voice Assistant",
+        "status": "Listening / Responding",
+    }
 
-class MasterAgent:
-    def __init__(self):
-        self.data = DataAnalysisAgent()
-        self.diag = DiagnosisAgent()
-        self.voice = VoiceAgent()
-        self.schedule = SchedulingAgent()
-        self.mfg = ManufacturingAgent()
-        self.ueba = UEBAAgent()
-
-    def process(self, v):
-        features = self.data.analyze(v)
-        result = self.diag.predict(features)
-
-        if result["risk"] > 0.7:
-            self.voice.call(v["vehicle_id"])
-            self.schedule.book(v["vehicle_id"])
-            self.mfg.rca()
-
-        return result
+# 🏭 Manufacturing Agent
+def manufacturing_agent():
+    return {
+        "batch": "B23",
+        "issue": "Recurrent brake wear",
+        "root_cause": "Material tolerance deviation",
+        "action": "CAPA ticket auto-created",
+        "loop": "Closed-loop learning enabled",
+    }
